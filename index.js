@@ -118,7 +118,70 @@ app.post("/newhotel", (req, res) => {
     res.send(true);
   });
 ///////////////// usuarios turistas 
+app.post("/newuserturista", (req, res) => {
+  var {name,fechanac,email,password} = req.body
+  password = md5(password);
+ let rol = 1;
+ connectionMYSQL.query("call addUser(?,?,?,?,?)", 
+ [name, fechanac, email, password, rol], function (err, result) {
+   if (err) {
+     console.log("err:", err);
+   } else {
+     console.log("results:", result);
+     
+   }
+ });
+ res.send(true);
+});
+/////////// busqueda de hoteles
+app.post("/busquedahabitaciones", (req, res) => {
+ 
+  const {fecha, ciudad, precio} = req.body;  
+  var list = [];
+  var masm = false;
+  var inicio = true;
+  var squery = 'select * from Habitacion ';
+  
 
+  if(fecha != null && fecha.length > 0){
+    if(inicio) squery += ' where ';
+    inicio = false;
+    if(masm)  squery += ' and ';
+    squery += '  fecha = ? ';
+    list.push(fecha); 
+    masm = true;
+
+  }
+
+  if(ciudad != null && ciudad > 0){
+    if(inicio) squery += ' where ';
+    inicio = false;
+    if(masm) squery += ' and ';
+    squery += '  ciudad = ? ';
+    list.push(ciudad); 
+    masm = true;
+  }  
+
+  if(precio != null && precio > 0){
+    if(inicio) squery += ' where ';
+    inicio = false;
+    if(masm) squery += ' and ';
+    squery += '  precio > ? ';
+    list.push(precio); 
+    masm = true;
+  }
+
+    connectionMYSQL.query(squery, 
+    list, function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+
+        res.send(result);
+      }
+    });
+  });  
+//////////// busqueda de hoteles 
 
 //////////// generales 
   app.post("/login", (req, res) => {
