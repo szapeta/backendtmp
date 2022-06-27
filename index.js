@@ -49,17 +49,36 @@ app.get("/u", (req, res) => {
     });
     res.send(true);
   });
-///// seccion de ABC hotel 
-////// añadir hotel 
-  app.post("/newhotel", (req, res) => {
-    var {cantidad_habitacion, precio,fecha,id_servicio,ciudad} = req.body;    
-    connectionMYSQL.query("call addHotel(?,?,?,?,?)", 
-    [cantidad_habitacion, precio, fecha,id_servicio, ciudad ], function (err, result) {
+///// seccion de ABC hotel
+///// añadir servicio 
+app.post("/newhotel", (req, res) => {
+  var {nombre, email,ciudad} = req.body;   
+  let tipo =1 ; 
+  connectionMYSQL.query("call addServicio(?,?,?,?)", 
+  
+  [nombre, email,tipo, ciudad], function (err, result) {
+    if (err) {
+      console.log("err:", err);
+    } else {
+      console.log("results:", result);
+      
+     
+    }
+  });
+  res.send(true);
+});
+
+////// añadir habitacion
+  app.post("/addhabitacion", (req, res) => {
+    var {No_habitacion, Tipo,Precio,Fecha,Capacidad,Descip,Id_Servicio} = req.body;    
+    connectionMYSQL.query("call addHabitacion(?,?,?,?,?,?,?)", 
+    [No_habitacion, Tipo, Precio,Fecha, Capacidad, Descip,Id_Servicio], function (err, result) {
       if (err) {
         console.log("err:", err);
       } else {
         console.log("results:", result);
         
+       
       }
     });
     res.send(true);
@@ -67,15 +86,14 @@ app.get("/u", (req, res) => {
 //// añadir reserva hotel 
   app.post("/addreservahotel", (req, res) => {
     
-    var {cantidad_habitacion, id_user,id_servicio} = req.body;
-    connectionMYSQL.query("call addReservaHotel(?,?,?)", 
-    [cantidad_habitacion, id_user,id_servicio,  ], function (err, result) {
+    var {fecha_inicio, fecha_fin,id_user,id_habitacion} = req.body;
+    connectionMYSQL.query("call addReservaHotel(?,?,?,?)", 
+    [fecha_inicio, fecha_fin,id_user,id_habitacion,  ], function (err, result) {
       if (err) {
         console.log("err:", err);
       } else {
         console.log("results:", result);
-        res.send(result[0]);
-        return
+        
       }
     });
     res.send(true);
@@ -99,7 +117,10 @@ app.get("/u", (req, res) => {
     });
     res.send(true);
   });
+///////////////// usuarios turistas 
 
+
+//////////// generales 
   app.post("/login", (req, res) => {
      var {user, pass} = req.body;
      pass = md5(pass);
