@@ -238,18 +238,20 @@ app.get("/listmarcas",  (req, res) => {
    //Agregar Auto
    //PArametos:
    //placa int , marca string, id_servicio int , modelo string, precio float
-   app.post("/addAuto", (req, res) => {
-     const {placa, marca, id_servicio, modelo, precio} = req.body;  
-       connectionMYSQL.query("call addAuto(?,?,?,?,?)", 
-       [placa, marca, id_servicio, modelo, precio ], function (err, result) {
-         if (err) {
-           console.log("err:", err);
-         } else {
-           console.log("results:", result);
-         }
-       });
-       res.send(true);
-     });
+  app.post("/addAuto", (req, res) => {
+    const {placa, marca, servicio,modelo, precio,ciudad} = req.body;  
+    const id_servicio = 3;
+      connectionMYSQL.query("call addAuto(?,?,?,?,?,?)", 
+      [placa, marca, servicio,modelo, precio,ciudad], function (err, result) {
+        if (err) {
+          console.log("err:", err);
+          res.send(result);
+        } else {
+          console.log("results:", result);
+          res.send(result);
+        }
+      });   
+    });
  
      /**agregar vuelo */
      app.post("/addVuelo", (req, res) => {
