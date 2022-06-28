@@ -347,4 +347,23 @@ console.log(squery);
         }
       });
     });   
+
+   /**obtener auto reservado id segio*/
+        app.post("/getReservaAutoId", (req, res) => {
+          //cantida_dias int, id_user int, id_servicio int
+          const {id_usuario} = req.body;  
+          
+            connectionMYSQL.query("call getRentaTurista(?)", 
+            [id_usuario], function (err, result) {
+              if (err) {
+                console.log("err:", err);
+                res.send(result);
+              } else {
+                console.log("results:", result);
+                res.send(result);
+              }
+            });
+          });   
+
+
 app.listen(3000);
