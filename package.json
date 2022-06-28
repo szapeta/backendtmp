@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type":"module",
   "scripts": {
-    "start": "node index.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "start": "node app.js",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --coverage"
   },
   "dependencies": {
     "cors": "^2.8.5",
