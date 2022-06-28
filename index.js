@@ -419,7 +419,7 @@ app.post("/addReservaVuelo", (req, res) => {
 /**buscar vehiculos por filtro */
 app.post("/listvehiculos", (req, res) => {
   //placa int, marca string, id_servicio int, modelo string, precio float
-  const { id_usuario, marca, placa, modelo, precio } = req.body;
+  const { id_usuario, marca, placa, modelo } = req.body;
   var list = [];
   var masm = false;
   var inicio = true;
@@ -458,14 +458,6 @@ app.post("/listvehiculos", (req, res) => {
     masm = true;
   }
 
-  if (precio != null && precio > 0) {
-    if (inicio) squery += " where ";
-    inicio = false;
-    if (masm) squery += " and ";
-    squery += "  precio >= ? ";
-    list.push(precio);
-    masm = true;
-  }
   connectionMYSQL.query(squery, list, function (err, result) {
     if (err) {
       res.send(err);
