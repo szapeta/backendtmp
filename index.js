@@ -601,16 +601,15 @@ console.log(squery);
         list.push(precio); 
         masm = true;
       }
-  
-  console.log(squery);
-        connectionMYSQL.query(squery, 
-          if (err) {
-        list, function (err, result) {
-            res.send(err);
-          } else {
-            res.send(result);
-          }
-        });
+      console.log(squery);
+      connectionMYSQL.query(squery, 
+      list, function (err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(result);
+        }
       });
+    });
 
 app.listen(3000);
