@@ -287,60 +287,64 @@ app.get("/listmarcas",  (req, res) => {
  
    //--
    /**buscar vehiculos por filtro */
-   app.post("/listvehiculos", (req, res) => {
-     //placa int, marca string, id_servicio int, modelo string, precio float
-     const {marca, placa, modelo, precio} = req.body;  
-     var list = [];
-     var masm = false;
-     var inicio = true;
-     var squery = 'select * from Auto ';
-     
- 
-     if(marca != null && marca > 0){
-       if(inicio) squery += ' where ';
-       inicio = false;
-       if(masm)  squery += ' and ';
-       squery += '  id_marca = ? ';
-       list.push(marca); 
-       masm = true;
- 
-     }
- 
-     if(placa != null && placa > 0){
-       if(inicio) squery += ' where ';
-       inicio = false;
-       if(masm) squery += ' and ';
-       squery += '  placa = ? ';
-       list.push(placa); 
-       masm = true;
-     }
- 
-     if(modelo != null && modelo.length > 0){
-       if(inicio) squery += ' where ';
-       inicio = false;
-       if(masm) squery += ' and ';
-       squery += '  modelo = ? ';
-       list.push(modelo); 
-       masm = true;
-     }
- 
-     if(precio != null && precio > 0){
-       if(inicio) squery += ' where ';
-       inicio = false;
-       if(masm) squery += ' and ';
-       squery += '  precio > ? ';
-       list.push(precio); 
-       masm = true;
-     }
- 
-       connectionMYSQL.query(squery, 
-       list, function (err, result) {
-         if (err) {
-           res.send(err);
-         } else {
- 
-           res.send(result);
-         }
-       });
-     });  
+  app.post("/listvehiculos", (req, res) => {
+    //placa int, marca string, id_servicio int, modelo string, precio float
+    const {id_usuario,marca, placa, modelo, precio} = req.body;  
+    var list = [];
+    var masm = false;
+    var inicio = true;
+    var squery = 'select a.id_servicio,a.placa, m.marca, a.modelo,a.precio  from Auto a inner join Marca m on a.id_marca = m.id_marca ';
+    
+
+    squery += ' where id_servicio = ? ';
+    list.push(id_usuario);
+    inicio = false;
+    masm = true;
+
+    if(marca != null && marca.length > 0){
+      if(inicio) squery += ' where ';
+      inicio = false;
+      if(masm) squery += ' and ';
+      squery += '  marca = ? ';
+      list.push(marca); 
+      masm = true;
+    }
+
+    if(placa != null && placa.length > 0){
+      if(inicio) squery += ' where ';
+      inicio = false;
+      if(masm) squery += ' and ';
+      squery += '  placa = ? ';
+      list.push(placa); 
+      masm = true;
+    }
+
+    if(modelo != null && modelo.length > 0){
+      if(inicio) squery += ' where ';
+      inicio = false;
+      if(masm) squery += ' and ';
+      squery += '  modelo = ? ';
+      list.push(modelo); 
+      masm = true;
+    }
+
+    if(precio != null && precio > 0){
+      if(inicio) squery += ' where ';
+      inicio = false;
+      if(masm) squery += ' and ';
+      squery += '  precio >= ? ';
+      list.push(precio); 
+      masm = true;
+    }
+
+console.log(squery);
+      connectionMYSQL.query(squery, 
+      list, function (err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(result);
+        }
+      });
+    });   
 app.listen(3000);
