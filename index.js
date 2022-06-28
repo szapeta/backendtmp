@@ -182,12 +182,11 @@ app.post("/reseñausuario", (req, res) => {
 /// get datos reserva
 
 app.post("/listreserva", (req, res) => {
-  var { id_habitacion } = req.body;
+  var { id_habitacion, id_user } = req.body;
+  console.log(id_habitacion, id_user)
   connectionMYSQL.query(
-    "SELECT h.no_habitacion, h.tipo, h.precio, h.fecha, h.capacidad, h.descip, h.id_servicio, c.ciudad FROM Habitacion  h INNER JOIN Ciudad c ON h.id_ciudad=c.id_ciudad  WHERE h.id_habitacion = " +
-      id_habitacion +
-      " ;",
-    [id_habitacion],
+    "SELECT h.no_habitacion, h.tipo, h.precio, h.fecha, h.capacidad, h.descip, h.id_servicio, c.ciudad FROM Habitacion  h INNER JOIN Ciudad c ON h.id_ciudad=c.id_ciudad  WHERE h.no_habitacion = " +
+      id_habitacion +" and h.id_servicio = "+id_user+";",
     function (err, result) {
       if (err) {
         console.log("err:", err);
@@ -206,7 +205,7 @@ app.post("/busquedahabitaciones", (req, res) => {
   var masm = false;
   var inicio = true;
   var squery =
-    "SELECT h.no_habitacion, h.tipo, h.precio, h.fecha, h.capacidad, h.descip, h.id_servicio, c.ciudad FROM Habitacion  h INNER JOIN Ciudad c ON h.id_ciudad=c.id_ciudad ";
+    "SELECT h.id_habitacion, h.tipo, h.precio, h.fecha, h.capacidad, h.descip, h.id_servicio, c.ciudad FROM Habitacion  h INNER JOIN Ciudad c ON h.id_ciudad=c.id_ciudad ";
 
   if (ciudad != null && ciudad.length > 0) {
     if (inicio) squery += "WHERE";
@@ -242,7 +241,6 @@ app.post("/busquedahabitaciones", (req, res) => {
     list.push(fecha);
     masm = true;
   }
-  console.log(squery);
   connectionMYSQL.query(squery, list, function (err, result) {
     if (err) {
       res.send(err);
@@ -254,12 +252,12 @@ app.post("/busquedahabitaciones", (req, res) => {
 //////////// busqueda de hoteles
 //// busqueda reservas
 app.post("/busquedarservas", (req, res) => {
-  const { fecha, fecha_fin } = req.body;
+  const { id_servicio,fecha, fecha_fin } = req.body;
   var list = [];
   var masm = false;
-  var inicio = true;
-  var squery = "select * from ReservaHotel ";
-
+  var inicio = false;
+  var squery = "SELECT rh.id_habitacion, rh.fecha_inicio, rh.fecha_fintipo FROM ReservaHotel rh INNER JOIN Habitacion h on rh.id_habitacion = h.id_habitacion WHERE h.id_servicio = ?; ";
+  list.push(id_servicio)
   if (fecha != null && fecha.length > 0) {
     if (inicio) squery += " where ";
     inicio = false;
@@ -493,7 +491,7 @@ app.post("/listareservasvuelosusuarios", (req, res) => {
   var masm = false;
   var inicio = true;
   var squery =
-    "SELECT v.id_vuelo,p.pais,p2.pais,v.precio,v.fecha FROM Vuelo v INNER JOIN Pais p ON v.origen = p.id_pais INNER JOIN Pais p2 ON v.destino = p2.id_pais  ";
+    "SELECT v.id_vuelo,p.pais origen,p2.pais destino,v.precio,v.fecha FROM Vuelo v INNER JOIN Pais p ON v.origen = p.id_pais INNER JOIN Pais p2 ON v.destino = p2.id_pais  ";
 
   if (origen != null && origen.length > 0) {
     if (inicio) squery += " where ";
@@ -670,8 +668,7 @@ app.post("/listvehiculosusuario", (req, res) => {
   var list = [];
   var masm = false;
   var inicio = true;
-  var squery =
-    "select a.id_servicio,a.placa, m.marca, a.modelo,a.precio  from Auto a inner join Marca m on a.id_marca = m.id_marca ";
+  var squery = "select a.id_servicio,a.placa, m.marca, a.modelo,a.precio  from Auto a inner join Marca m on a.id_marca = m.id_marca ";
 
   if (marca != null && marca.length > 0) {
     if (inicio) squery += " where ";
@@ -708,13 +705,14 @@ app.post("/listvehiculosusuario", (req, res) => {
     list.push(precio);
     masm = true;
   }
+  
 
-  console.log(squery);
   connectionMYSQL.query(squery, list, function (err, result) {
     if (err) {
       res.send(err);
     } else {
-      console.log(result);
+      
+      console.log(result)
       res.send(result);
     }
   });
