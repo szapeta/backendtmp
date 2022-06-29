@@ -314,7 +314,7 @@ describe("POST /listcomentarios", () => {
   });
 });
 
-describe("GET /addhabitacion", () => {
+describe("POST /addhabitacion", () => {
   const data = {
     No_habitacion : 0,
     Tipo : 'Simple',
@@ -324,6 +324,120 @@ describe("GET /addhabitacion", () => {
     Descip : 'Habitacion simpel',
     Id_Servicio : 2,
     Ciudad : 1
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /newhotel", () => {
+  const data = {
+    nombre : 'hotel los caminos de la vida',
+    email : 'pruebabababa@gmail.com',
+    ciudad : 1,
+    tipo : 1
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /drophabitacion", () => {
+  const data = {
+    id_habitacion : 1
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /dropvuelo", () => {
+  const data = {
+    id_vuelo : 1
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /drophabitacion", () => {
+  const data = {
+    id_habitacion : 1
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /addreservahotel", () => {
+  const data = {
+    fecha_inicio :"20/05/2022" ,
+    fecha_fin:"21/05/2022",
+    id_user: 8,
+    id_habitacion: 1
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /reseñausuario", () => {
+  const data = {
+    user :8 
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /listreserva", () => {
+  const data = {
+    id_habitacion : 1
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /busquedahabitaciones", () => {
+  const data = {
+    precio : 20
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /busquedarservas", () => {
+  const data = {
+   
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /listvuelosusu", () => {
+  const data = {
+   id_vuelo : 8 
+    
   }
   test("200 - Success", async () => {
     const response = await request(app).post("/addhabitacion").send(data);
