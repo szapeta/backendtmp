@@ -339,7 +339,7 @@ describe("POST /newhotel", () => {
     tipo : 1
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/newhotel").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -350,7 +350,7 @@ describe("POST /drophabitacion", () => {
     
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/drophabitacion").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -361,7 +361,7 @@ describe("POST /dropvuelo", () => {
     
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/dropvuelo").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -372,7 +372,7 @@ describe("POST /drophabitacion", () => {
     
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/drophabitacion").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -385,7 +385,7 @@ describe("POST /addreservahotel", () => {
     id_habitacion: 1
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/addreservahotel").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -396,7 +396,7 @@ describe("POST /reseñausuario", () => {
     
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/reseñausuario").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -407,7 +407,7 @@ describe("POST /listreserva", () => {
     
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/listreserva").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -418,7 +418,7 @@ describe("POST /busquedahabitaciones", () => {
     
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/busquedahabitaciones").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -429,7 +429,7 @@ describe("POST /busquedarservas", () => {
     
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/busquedarservas").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
@@ -440,7 +440,7 @@ describe("POST /listvuelosusu", () => {
     
   }
   test("200 - Success", async () => {
-    const response = await request(app).post("/addhabitacion").send(data);
+    const response = await request(app).post("/listvuelosusu").send(data);
     expect(response.statusCode).toBe(200);
   });
 });
