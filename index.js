@@ -242,7 +242,7 @@ app.post("/busquedahabitaciones", (req, res) => {
     list.push(fecha);
     masm = true;
   }
-
+  console.log(squery);
   connectionMYSQL.query(squery, list, function (err, result) {
     if (err) {
       res.send(err);
@@ -357,7 +357,6 @@ app.get("/listciudad", (req, res) => {
 //placa int , marca string, id_servicio int , modelo string, precio float
 app.post("/addAuto", (req, res) => {
   const { placa, marca, servicio, modelo, precio, ciudad } = req.body;
-  const id_servicio = 3;
   connectionMYSQL.query(
     "call addAuto(?,?,?,?,?,?)",
     [placa, marca, servicio, modelo, precio, ciudad],
@@ -366,7 +365,7 @@ app.post("/addAuto", (req, res) => {
         console.log("err:", err);
         res.send(result);
       } else {
-        res.send(result);
+        res.send(result[0]);
       }
     }
   );
@@ -375,12 +374,19 @@ app.post("/addAuto", (req, res) => {
 /**agregar vuelo */
 app.post("/addVuelo", (req, res) => {
   //fecha string, origen string, destino string, catnida_asiento int, precio float, vuelta int, id_servicio int
-  const { fecha, origen, destino, catnida_asiento, preciovuelta, id_servicio } =
-    req.body;
+  const {
+    fecha,
+    origen,
+    destino,
+    catnida_asiento,
+    precio,
+    vuelta,
+    id_servicio,
+  } = req.body;
 
   connectionMYSQL.query(
-    "call addVuelo(?,?,?,?,?,?)",
-    [fecha, origen, destino, catnida_asiento, preciovuelta, id_servicio],
+    "call addVuelo(?,?,?,?,?,?,?)",
+    [fecha, origen, destino, catnida_asiento, precio, vuelta, id_servicio],
     function (err, result) {
       if (err) {
         console.log("err:", err);
@@ -579,4 +585,162 @@ app.post("/listareservasvuelos", (req, res) => {
       res.send(result);
     }
   });
+});
+
+app.post("/addResena", (req, res) => {
+  //cantida_dias int, id_user int, id_servicio int
+  const { comentario, user, servicio } = req.body;
+  connectionMYSQL.query(
+    "call addResena(?,?,?)",
+    [comentario, user, servicio],
+    function (err, result) {
+      if (err) {
+        console.log("err:", err);
+        res.send(result);
+      } else {
+        res.send(result[0]);
+      }
+    }
+  );
+});
+
+app.post("/getResena", (req, res) => {
+  //cantida_dias int, id_user int, id_servicio int
+  const { id_resena } = req.body;
+  connectionMYSQL.query(
+    "call getResena(?)",
+    [id_resena],
+    function (err, result) {
+      if (err) {
+        console.log("err:", err);
+        res.send(result);
+      } else {
+        res.send(result[0]);
+      }
+    }
+  );
+});
+
+app.post("/getUsuario", (req, res) => {
+  //cantida_dias int, id_user int, id_servicio int
+  const { id_usuario } = req.body;
+  connectionMYSQL.query(
+    "call getUsuario(?)",
+    [id_usuario],
+    function (err, result) {
+      if (err) {
+        console.log("err:", err);
+        res.send(result);
+      } else {
+        res.send(result[0]);
+      }
+    }
+  );
+});
+
+app.post("/addReservaAuto", (req, res) => {
+  //cantida_dias int, id_user int, id_servicio int
+  const { fecha_inicio, fecha_final, id_user, placa } = req.body;
+  connectionMYSQL.query(
+    "call addRentaAuto(?,?,?,?)",
+    [fecha_inicio, fecha_final, id_user, placa],
+    function (err, result) {
+      if (err) {
+        console.log("err:", err);
+        res.send(result);
+      } else {
+        res.send(result[0]);
+      }
+    }
+  );
+});
+
+app.post("/getAuto", (req, res) => {
+  const { placa } = req.body;
+  console.log(placa);
+  connectionMYSQL.query(
+    "select a.placa, m.marca, a.modelo,a.precio from Auto a inner join Marca m on a.id_marca = m.id_marca where placa = ? ",
+    [placa],
+    function (err, result) {
+      if (err) {
+        res.send(result);
+      } else {
+        console.log(result);
+        res.send(result[0]);
+      }
+    }
+  );
+});
+
+app.post("/listvehiculosusuario", (req, res) => {
+  //placa int, marca string, id_servicio int, modelo string, precio float
+  const { marca, placa, modelo, precio } = req.body;
+  var list = [];
+  var masm = false;
+  var inicio = true;
+  var squery =
+    "select a.id_servicio,a.placa, m.marca, a.modelo,a.precio  from Auto a inner join Marca m on a.id_marca = m.id_marca ";
+
+  if (marca != null && marca.length > 0) {
+    if (inicio) squery += " where ";
+    inicio = false;
+    if (masm) squery += " and ";
+    squery += "  marca = ? ";
+    list.push(marca);
+    masm = true;
+  }
+
+  if (placa != null && placa.length > 0) {
+    if (inicio) squery += " where ";
+    inicio = false;
+    if (masm) squery += " and ";
+    squery += "  placa = ? ";
+    list.push(placa);
+    masm = true;
+  }
+
+  if (modelo != null && modelo.length > 0) {
+    if (inicio) squery += " where ";
+    inicio = false;
+    if (masm) squery += " and ";
+    squery += "  modelo = ? ";
+    list.push(modelo);
+    masm = true;
+  }
+
+  if (precio != null && precio > 0) {
+    if (inicio) squery += " where ";
+    inicio = false;
+    if (masm) squery += " and ";
+    squery += "  precio >= ? ";
+    list.push(precio);
+    masm = true;
+  }
+
+  console.log(squery);
+  connectionMYSQL.query(squery, list, function (err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+app.post("/resenausuario", (req, res) => {
+  var { user } = req.body;
+
+  connectionMYSQL.query(
+    "call getResenaUsuario(?)",
+    [user],
+    function (err, result) {
+      if (err) {
+        console.log("err:", err);
+      } else {
+        res.send(result[0]);
+        return;
+      }
+    }
+  );
 });
