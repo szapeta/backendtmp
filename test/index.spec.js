@@ -303,3 +303,30 @@ describe("TEST: Visualizar Reseña", () => {
     expect(response.statusCode).toBe(200);
   });
 });
+
+describe("POST /listcomentarios", () => {
+  const data = {
+    user: 1,
+  };
+  test("200 - Success", async () => {
+    const response = await request(app).post("/listcomentarios").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("GET /addhabitacion", () => {
+  const data = {
+    No_habitacion : 0,
+    Tipo : 'Simple',
+    Precio : 100,
+    Fecha : '2022-06-05',
+    Capacidad : 50,
+    Descip : 'Habitacion simpel',
+    Id_Servicio : 2,
+    Ciudad : 1
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/addhabitacion").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});

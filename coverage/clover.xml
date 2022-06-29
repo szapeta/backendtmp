@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1656463878946" clover="3.2.0">
-  <project timestamp="1656463878946" name="All files">
-    <metrics statements="378" coveredstatements="78" conditionals="222" coveredconditionals="10" methods="62" coveredmethods="20" elements="662" coveredelements="108" complexity="0" loc="378" ncloc="378" packages="1" files="1" classes="1"/>
+<coverage generated="1656464748997" clover="3.2.0">
+  <project timestamp="1656464748998" name="All files">
+    <metrics statements="378" coveredstatements="95" conditionals="222" coveredconditionals="15" methods="62" coveredmethods="30" elements="662" coveredelements="140" complexity="0" loc="378" ncloc="378" packages="1" files="1" classes="1"/>
     <file name="index.js" path="C:\Users\germa\OneDrive\Escritorio\repos\backendtmp\index.js">
-      <metrics statements="378" coveredstatements="78" conditionals="222" coveredconditionals="10" methods="62" coveredmethods="20"/>
+      <metrics statements="378" coveredstatements="95" conditionals="222" coveredconditionals="15" methods="62" coveredmethods="30"/>
       <line num="5" count="1" type="stmt"/>
       <line num="6" count="1" type="stmt"/>
       <line num="7" count="1" type="stmt"/>
       <line num="10" count="1" type="stmt"/>
       <line num="18" count="1" type="stmt"/>
-      <line num="19" count="0" type="stmt"/>
-      <line num="20" count="0" type="stmt"/>
-      <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="20" count="1" type="stmt"/>
+      <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="25" count="0" type="stmt"/>
-      <line num="27" count="0" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
       <line num="33" count="1" type="stmt"/>
-      <line num="43" count="0" type="stmt"/>
-      <line num="44" count="0" type="stmt"/>
-      <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="43" count="1" type="stmt"/>
+      <line num="44" count="1" type="stmt"/>
+      <line num="57" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="58" count="0" type="stmt"/>
-      <line num="60" count="0" type="stmt"/>
+      <line num="60" count="1" type="stmt"/>
       <line num="67" count="1" type="stmt"/>
       <line num="68" count="0" type="stmt"/>
       <line num="69" count="0" type="stmt"/>
@@ -151,20 +151,20 @@
       <line num="315" count="0" type="stmt"/>
       <line num="316" count="0" type="stmt"/>
       <line num="322" count="1" type="stmt"/>
-      <line num="323" count="0" type="stmt"/>
-      <line num="324" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="323" count="1" type="stmt"/>
+      <line num="324" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="325" count="0" type="stmt"/>
-      <line num="327" count="0" type="stmt"/>
+      <line num="327" count="1" type="stmt"/>
       <line num="333" count="1" type="stmt"/>
-      <line num="334" count="0" type="stmt"/>
-      <line num="335" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="334" count="1" type="stmt"/>
+      <line num="335" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="336" count="0" type="stmt"/>
-      <line num="338" count="0" type="stmt"/>
+      <line num="338" count="1" type="stmt"/>
       <line num="344" count="1" type="stmt"/>
-      <line num="345" count="0" type="stmt"/>
-      <line num="346" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="345" count="1" type="stmt"/>
+      <line num="346" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="347" count="0" type="stmt"/>
-      <line num="349" count="0" type="stmt"/>
+      <line num="349" count="1" type="stmt"/>
       <line num="358" count="1" type="stmt"/>
       <line num="359" count="3" type="stmt"/>
       <line num="360" count="3" type="stmt"/>
