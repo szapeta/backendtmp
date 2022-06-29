@@ -444,3 +444,71 @@ describe("POST /listvuelosusu", () => {
     expect(response.statusCode).toBe(200);
   });
 });
+
+describe("POST /listvehiculos", () => {
+  const data = {
+    id_usuario : 8 
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/id_usuario").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /getReservaAutoId", () => {
+  const data = {
+    id_usuario : 8 
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/getReservaAutoId").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /listareservasvuelosusuarios", () => {
+  const data = {
+    
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/listareservasvuelosusuarios").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /listareservasvuelos", () => {
+  const data = {
+    
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/listareservasvuelos").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+
+
+describe("POST /listvehiculosusuario", () => {
+  const data = {
+    
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/listvehiculosusuario").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("POST /resenausuario", () => {
+  const data = {
+    user:8
+    
+  }
+  test("200 - Success", async () => {
+    const response = await request(app).post("/resenausuario").send(data);
+    expect(response.statusCode).toBe(200);
+  });
+});
